@@ -1,0 +1,215 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?-5a0ci9');
+	src:url('fonts/icomoon.eot?#iefix-5a0ci9') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?-5a0ci9') format('truetype'),
+		url('fonts/icomoon.woff?-5a0ci9') format('woff'),
+		url('fonts/icomoon.svg?-5a0ci9#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-wechat:before {
+	content: "\f1d7";
+}
+.icon-weixin:before {
+	content: "\f1d7";
+}
+.icon-vertical_align_top:before {
+	content: "\e0f4";
+}
+.icon-chat-3:before {
+	content: "\e600";
+}
+.icon-phone:before {
+	content: "\e601";
+}
+
+
+
+
+
+
+/**/
+.toolbar{
+	position: fixed;
+	left: 50%;
+	bottom: 5px;
+	margin-left: -26px;
+}
+.toolbar-item{
+	position: relative;
+	display: block;
+	width: 52px;
+	height: 52px;
+	margin-top: 1px;
+
+}
+.toolbar-item:hover .toolbar-btn:before{
+	top:-52px;
+}
+.toolbar-item:hover .toolbar-btn:after {
+	top:0;
+}
+.toolbar-item:hover:after {
+	opacity: 1;
+	filter:alpha(opacity=1);
+	transform:scale(1);/*变化到最小，使用css3的2d变换*/
+	-webkit-transform:scale(1);
+	-moz-transform:scale(1);
+	-ms-transform:scale(1);
+	-o-transform:scale(1);
+}
+.toolbar-item:after{
+	content: "";   
+	position: absolute;
+	right: 52px;
+	bottom: -10px;
+	width: 172px;
+	background-image: url(../img/toolbar.png);
+	background-repeat: no-repeat;
+
+	opacity: 0;
+	filter:alpha(opacity=0);
+	transform-origin:95% 95%;/*调整动画的基准点 右下方 transform-origin:right bottom;*/
+	-webkit-transform-origin:95% 95%;
+	-moz-transform-origin:95% 95%;
+	-ms-transform-origin:95% 95%;
+	-o-transform-origin:95% 95%;
+
+	transform:scale(0.01);/*变化到最小，使用css3的2d变换*/
+	-webkit-transform:scale(0.01);
+	-moz-transform:scale(0.01);
+	-ms-transform:scale(0.01);
+	-o-transform:scale(0.01);
+	/*添加平滑的过度效果*/
+	transition:all 1s;
+	-webkit-transition:all 1s;
+	-moz-transition:all 1s;
+	-ms-transition:all 1s;
+	-o-transition:all 1s;
+}
+
+.toolbar-item-wechat{
+
+}
+.toolbar-item-wechat:after{
+	content: "";
+	height: 212px;
+	background-position: 0 0 ;
+}
+.toolbar-item-wechat .toolbar-btn:before{
+	content: "\f1d7";
+}
+.toolbar-item-wechat .toolbar-btn:after{
+	content: "公众\A账号";
+}
+.toolbar-item-feedback{
+
+}
+.toolbar-item-feedback .toolbar-btn:before{
+	content: "\e600";
+}
+.toolbar-item-feedback .toolbar-btn:after{
+	content: "意见\A反馈";
+}
+.toolbar-item-app{
+
+}
+.toolbar-item-app:after{
+	content: "";
+	height: 194px;
+	background-position:  0 -222px;
+}
+.toolbar-item-app .toolbar-btn:before{
+	content: "\e601";
+}
+.toolbar-item-app .toolbar-btn:after{
+	content: "APP\A下载";
+}
+.toolbar-item-top{
+
+}
+.toolbar-item-top .toolbar-btn:before{
+	content: "\e0f4";
+}
+.toolbar-item-top .toolbar-btn:after{
+	content: "返回\A顶部";
+}
+
+.toolbar-btn{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 52px;
+	height: 52px;
+	overflow: hidden;
+
+	/*======================*/
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+}
+.toolbar-btn:before{//icon
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 52px;
+	height: 52px;
+	background-color: #d0d6d9;
+	font-size: 30px;
+	color:#fff;
+	text-align: center;
+	line-height: 52px;
+	transition:top 1s;
+	-webkit-transition:top 1s;
+	-moz-transition:top 1s;
+	-ms-transition:top 1s;
+	-o-transition:top 1s;
+}
+.toolbar-btn:after{//text
+ 	content: "";
+	position: absolute;
+	left: 0;
+	top: 52px;
+	width: 52px;
+	height: 52px;
+	background-color: #98a1a6;
+	font-size: 12px;
+	color:#fff;
+	text-align: center;
+	line-height: 1.2;
+	padding-top: 12px;
+
+	transition:top 1s;
+	-webkit-transition:top 1s;
+	-moz-transition:top 1s;
+	-ms-transition:top 1s;
+	-o-transition:top 1s;
+
+	white-space: pre;   /*有格式的，换行*/
+}
