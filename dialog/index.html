@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dialog</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="app-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="不超过150个字符">
+    <meta name="keywords" content="关键字">
+    <meta name="kenve" content="kenve.github.com">
+    <link rel="apple-touch-icon-precomposed" href="static/images/touch-icon.png">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="stylesheet" href="dialog.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-size: 12px;
+        padding: 20px;
+    }
+    
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 20px 0;
+        background: green;
+        border-radius: 10px;
+        color: #fff;
+        border: 1px solid #eee;
+    }
+    </style>
+</head>
+
+<body>
+    <!--     <div class="g-dialog-container">
+        <div class="dialog-window">
+            <div class="dialog-header"></div>
+            <div class="dialog-content">confirm this operation ?</div>
+            <div class="dialog-footer">
+                <button class="green">button 1</button>
+                <button>button 2</button>
+                <button class="red">button 2</button>
+            </div>
+        </div>
+    </div> -->
+    <button id="btn1">没有传递任何参数（需手动关闭）</button>
+    <button id="btn2">弹出一个不带任何按钮，且是警告的框，并且2秒后自动关闭</button>
+    <button id="btn3">弹出一个有确认和取消的成功框，点击按钮直接关闭</button>
+    <button id="btn4">弹出一个有确认按钮的警告框，点击按钮不关闭（需手动关闭）</button>
+    <button id="btn5">弹出一个多组合的按钮框，且样式可定制</button>
+    <button id="btn6">弹出一个确认和删除的框，点击确认弹出加载框2秒自动关闭，点击删除按钮把上一次框关闭</button>
+    <button id="btn7">带动画的弹出框</button>
+    <button id="btn8">多弹框</button>
+    <button id="btn9" style="background-color:red">延时关闭加回调</button>
+    <button id="btn10" style="background-color:red">点击遮罩层是否可以关闭</button>
+    <script src="zepto.min.js"></script>
+    <script src="dialog.js"></script>
+    <script>
+    // $.dialog({type:'waiting',message:'DDDDDDDDDDDDD'});
+    $('#btn1').click(function() {
+        var dialog = $.dialog({
+
+        });
+
+    });
+
+
+    $('#btn2').click(function() {
+        var dialog = $.dialog({
+            type: 'warning',
+            message: '2秒后关闭',
+            delay: 2000
+
+        });
+
+    });
+    $('#btn3').click(function() {
+        var dialog = $.dialog({
+            type: 'ok',
+            message: '标题',
+            buttons: [{
+                type: 'green',
+                text: '成功'
+            }, {
+                type: 'red',
+                text: '失败'
+            }],
+        });
+
+    });
+
+    $("#btn4").click(function() {
+        var d = $.dialog({
+            maskClose: true,
+            type: 'warning',
+            message: '我叫警告框',
+            buttons: [{
+                text: '确认',
+                type: 'red',
+                callback: function() {
+                    return false;
+                }
+            }],
+
+        });
+    });
+    $("#btn5").click(function() {
+        var d = $.dialog({
+            maskClose: true,
+            type: 'waiting',
+            message: '多组合的按钮框，且按钮样式可以定制',
+            buttons: [{
+                text: '确认',
+                callback: function() {
+                    return false;
+                }
+            }, {
+                text: '好吧',
+                type: 'green',
+                callback: function() {
+                    alert("点击我可以关闭")
+                }
+            }, {
+                text: '好吧',
+                type: 'green',
+                callback: function() {
+                    alert("点击我可以关闭")
+                }
+            }],
+
+        });
+    });
+    $("#btn6").click(function() {
+        var d = $.dialog({
+            maskClose: true,
+            type: 'warning',
+            message: '弹出一个确认和删除的框，点击去确认弹出加载框2秒自动关闭，点击删除按钮把上一次框关闭',
+            buttons: [{
+                text: '确认',
+                callback: function() {
+                    $.dialog({
+                        maskClose: true,
+                        type: 'loading',
+                        delay: 2000
+                    });
+                }
+            }, {
+                text: '删除',
+                type: 'green',
+                callback: function() {
+                    $.dialog({
+                        maskClose: true,
+                        type: "warning",
+                        message: '删除之前的弹窗',
+                        buttons: [{
+                            text: '删除之前的弹窗',
+                            type: 'red',
+                            callback: function() {
+                                d.close();
+                                return false;
+                            }
+                        }]
+                    })
+                    return false;
+                }
+            }, ],
+        });
+    });
+    $("#btn7").click(function() {
+        var d = $.dialog({
+            maskClose: true,
+            type: 'ok',
+            buttons: [{
+                text: '确认'
+            }, {
+                text: '取消'
+            }],
+            effect: true
+        });
+    });
+    $("#btn8").click(function() {
+        var d = $.dialog({
+            maskClose: true,
+            type: 'warning',
+            message: '多弹框的层级关系',
+            buttons: [{
+                    text: '弹出第二个框',
+                    type: 'red',
+                    callback: function() {
+                        var d = $.dialog();
+                        return false;
+                    }
+                }, {
+                    text: '弹出第三个框',
+                    type: 'red',
+                    callback: function() {
+                        var d = $.dialog();
+                        return false;
+                    }
+                }
+
+            ],
+
+        });
+    });
+    $("#btn9").click(function() {
+        var d = $.dialog({
+            maskClose: true,
+            type: 'warning',
+            message: '延时关闭加回调',
+            delay: 2000,
+            delayCallback: function() {
+                alert("延时关闭");
+            },
+        });
+    });
+    $("#btn10").click(function() {
+        var d = $.dialog({
+            type: 'warning',
+            message: '点击遮罩层关闭',
+            buttons: [{
+                text: '确认',
+                type: 'green',
+                callback: function() {
+                    alert("ok");
+                }
+            }, {
+                text: '取消',
+                type: 'red',
+                callback: function() {
+                    return false;
+                }
+            }],
+            maskClose: true,
+        });
+    });
+
+    // var dialog=new Dialog(
+    // var dialog=$.dialog(
+    //     {
+    //   	//对话框的宽 高
+    //      	// width:100,
+    //      	// height:50,
+    //      	//对话框的透明度
+    //      	maskOpacity:.5,
+    //      	//对话框提示信息
+    //      	message:'hello 啊啊啊啊啊',
+    //      	//对话框类型
+    //      	type:'waiting',
+    //          //按钮配置，
+    //          buttons:[
+
+    //          {
+    //          	type:'red',
+    //          	text:'却笑',
+    //          	callback:function () {
+    //          		console.log(1);
+    //          		return false;
+    //          	}
+    //          },
+    //            {
+    //          	type:'green',
+    //          	text:'好啊',
+    //          	callback:function () {
+    //          		console.log(2);
+    //          	}
+    //          }
+    //          ],
+    //          //弹出框延迟多久关闭
+    //          // delay:3000,
+
+
+    //      }
+    // 	);
+    </script>
+</body>
+
+</html>
